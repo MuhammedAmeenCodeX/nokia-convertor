@@ -1,0 +1,155 @@
+// index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP4 to Nokia Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Convert MP4 to Nokia Keypad Format</h1>
+        <p>Select an MP4 file to convert to 320x240 3GP for older Nokia phones:</p>
+
+        <form id="uploadForm" action="/convert" method="POST" enctype="multipart/form-data">
+            <input type="file" name="mp4file" accept="video/mp4" required>
+            <button type="submit">Convert to Nokia Format</button>
+        </form>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            fetch('/convert', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const outputDiv = document.getElementById('output');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = data.fileUrl;
+                    downloadLink.innerText = 'Download Converted File';
+                    downloadLink.download = 'converted_file.3gp';
+                    outputDiv.appendChild(downloadLink);
+                } else {
+                    alert('File conversion failed. Please try again.');
+                }
+            })
+            .catch(err => {
+                alert('Error occurred during conversion: ' + err.message);
+            });
+        });
+    </script>
+
+</body>
+</html>// index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP4 to Nokia Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Convert MP4 to Nokia Keypad Format</h1>
+        <p>Select an MP4 file to convert to 320x240 3GP for older Nokia phones:</p>
+
+        <form id="uploadForm" action="/convert" method="POST" enctype="multipart/form-data">
+            <input type="file" name="mp4file" accept="video/mp4" required>
+            <button type="submit">Convert to Nokia Format</button>
+        </form>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            fetch('/convert', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const outputDiv = document.getElementById('output');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = data.fileUrl;
+                    downloadLink.innerText = 'Download Converted File';
+                    downloadLink.download = 'converted_file.3gp';
+                    outputDiv.appendChild(downloadLink);
+                } else {
+                    alert('File conversion failed. Please try again.');
+                }
+            })
+            .catch(err => {
+                alert('Error occurred during conversion: ' + err.message);
+            });
+        });
+    </script>
+
+</body>
+</html>
